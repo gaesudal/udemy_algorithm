@@ -60,3 +60,109 @@ function sumZeroRefactored (arr) {
         }
     }
 }
+
+function maxSubarraySum (arr, num) {
+    if (num > arr.length) {
+        return null;
+    }
+    var max = -Infinity;
+    for (let i = 0; i < arr.length - num + 1; i++) {
+        temp = 0;
+        for (let j = 0; j < num ; j++) {
+            temp += arr[i + j];
+        }
+        if (temp > max) {
+            max = temp;
+        }
+        return max;
+    }
+} // O(N^2)
+
+function maxSubarraySumRefactor (arr, num) {
+    let maxSum = 0;
+    let tempSum = 0;
+    if (arr.length < num) return null;
+    for (let i = 0; i < num; i++) {
+        maxSum += arr[i];
+    }
+    for ( let i = num; i < arr. length; i++) {
+        tempSum = tempSum - arr[i - num] + arr[i];
+        maxSubarraySum = Math.max(maxSum, tempSum);
+    }
+    return maxSum;
+} // O(N)
+
+function search(arr, val) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === val) {
+            return i;
+        }
+        return -1
+    }
+} // Linear Search - Time O(N)
+
+function searchRefactor(arr, val) {
+    let min = 0;
+    let max = arr.length - 1;
+
+    while (min <= max) {
+        let middle = Math.floor((min + max) / 2);
+        let currentElement = arr[middle];
+        
+        if (arr[middle] < val) {
+            min = middle + 1;
+        }
+        else if (arr[middle] > val) {
+            max = middle - 1;
+        }
+        else {
+            return middle;
+        }
+    }
+    return -1;
+} // Binary Search - Time O(logN)
+
+function validAnagram(arr1, arr2) { // 내풀이
+    if (arr1.length != arr2.length) {
+        return false;
+    }
+    
+    let counter1 = {};
+    let counter2 = {};
+    
+    for (let val of arr1) {
+        counter1[val] = (counter1[val] || 0) + 1;
+    }
+    
+    for (let val of arr2) {
+        counter2[val] = (counter2[val] || 0) + 1;
+    }
+    
+    for (let key in counter1) {
+        if (!(key in counter2)) {
+            return false;
+        } else if (counter1[key] !== counter2[key]) {
+            return false;
+        }
+    }
+    return true;
+  }
+
+  function countUniqueValues(arr1) { // 내풀이
+    if (arr1.length === 0) {
+        return 0;
+    }
+    
+    let min;
+    let resultCount = 0;
+    
+    for (let value of arr1) {
+        if (value === min) {
+            continue;
+        }
+        min = value;
+        resultCount++;
+    }
+    
+    return resultCount;
+  }
