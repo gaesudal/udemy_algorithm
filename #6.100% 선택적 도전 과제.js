@@ -92,3 +92,41 @@ function isSubsequence(arr1, arr2) {
   }
   return false;
 }
+
+function maxSubarraySum(arr, num){
+  let maxSum = 0;
+  let tempSum = 0;
+  if (arr.length < num) return null;
+  for (let i = 0; i < num; i++) {
+      maxSum += arr[i];
+  }
+  tempSum = maxSum;
+  for ( let i = num; i < arr. length; i++) {
+      tempSum = tempSum - arr[i - num] + arr[i];
+      maxSum = Math.max(maxSum, tempSum);
+  }
+  return maxSum;
+}
+
+function minSubArrayLen(arr, sum) {
+
+}
+
+function findLongestSubstring(str){
+  if (str.length === 0) {
+    return 0;
+  }
+
+  let currentStr = '';
+  let result = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    if (currentStr.indexOf(str[i]) === -1) {
+      currentStr = currentStr.concat(str[i]);
+    } else {
+      currentStr = currentStr.substring(currentStr.indexOf(str[i])+1).concat(str[i]);
+    }
+    if (currentStr.length > result) result = currentStr.length;
+  }
+  return result;
+}
