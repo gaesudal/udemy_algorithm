@@ -109,7 +109,25 @@ function maxSubarraySum(arr, num){
 }
 
 function minSubArrayLen(arr, sum) {
+ let tmpSum = 0;
+ let result = Infinity;
+ let minIndex = 0;
+ for (let i = 0; i <arr.length; i++) {
+ 
+  tmpSum += arr[i];
 
+  if (tmpSum >= sum) {
+    if (result > i - minIndex){
+      result = i - minIndex + 1;
+    }
+    tmpSum -= arr[minIndex++];
+    tmpSum -= arr[i--];
+  }
+
+ }
+
+
+ return result === Infinity ? 0:result;
 }
 
 function findLongestSubstring(str){
