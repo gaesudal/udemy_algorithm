@@ -77,6 +77,7 @@ function maxSubarraySum (arr, num) {
         return max;
     }
 }
+} // O(N^2)
 
 function maxSubarraySumRefactor (arr, num) {
     let maxSum = 0;
@@ -90,7 +91,7 @@ function maxSubarraySumRefactor (arr, num) {
         maxSubarraySum = Math.max(maxSum, tempSum);
     }
     return maxSum;
-}
+} // O(N)
 
 function search(arr, val) {
     for (let i = 0; i < arr.length; i++) {
@@ -99,7 +100,7 @@ function search(arr, val) {
         }
         return -1
     }
-}
+}// Linear Search - Time O(N)
 
 function searchRefactor(arr, val) {
     let min = 0;
@@ -120,4 +121,49 @@ function searchRefactor(arr, val) {
         }
     }
     return -1;
-}
+}// Binary Search - Time O(logN)
+
+function validAnagram(arr1, arr2) { // 내풀이
+    if (arr1.length != arr2.length) {
+        return false;
+    }
+    
+    let counter1 = {};
+    let counter2 = {};
+    
+    for (let val of arr1) {
+        counter1[val] = (counter1[val] || 0) + 1;
+    }
+    
+    for (let val of arr2) {
+        counter2[val] = (counter2[val] || 0) + 1;
+    }
+    
+    for (let key in counter1) {
+        if (!(key in counter2)) {
+            return false;
+        } else if (counter1[key] !== counter2[key]) {
+            return false;
+        }
+    }
+    return true;
+  }
+
+  function countUniqueValues(arr1) { // 내풀이
+    if (arr1.length === 0) {
+        return 0;
+    }
+    
+    let min;
+    let resultCount = 0;
+    
+    for (let value of arr1) {
+        if (value === min) {
+            continue;
+        }
+        min = value;
+        resultCount++;
+    }
+    
+    return resultCount;
+  }
